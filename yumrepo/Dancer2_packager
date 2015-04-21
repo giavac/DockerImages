@@ -1,0 +1,94 @@
+This file is just a note about how to package Dancer2.
+It needs rework to automatice the process.
+
+cpanm local::lib
+cpanm Test::Fatal
+cpanm Test::Requires
+cpanm Module::Build::Tiny
+cpanm Test::Deep
+cpanm Moo
+cpanm --force Test::Memory::Cycle
+
+fpm -s cpan -t rpm App::Cmd::Setup
+#fpm -s cpan -t rpm Carp
+fpm -s cpan -t rpm Class::Load
+fpm -s cpan -t rpm Config::Any
+#fpm -s cpan -t rpm Cwd
+#fpm -s cpan -t rpm Data::Dumper
+#fpm -s cpan -t rpm Digest::SHA
+#fpm -s cpan -t rpm Encode
+#fpm -s cpan -t rpm Exporter
+#fpm -s cpan -t rpm Fcntl
+#fpm -s cpan -t rpm File::Basename
+#fpm -s cpan -t rpm File::Copy
+#fpm -s cpan -t rpm File::Find
+#fpm -s cpan -t rpm File::Path
+fpm -s cpan -t rpm File::ShareDir
+#fpm -s cpan -t rpm File::Spec
+#fpm -s cpan -t rpm File::Spec::Functions
+#fpm -s cpan -t rpm File::Temp
+fpm -s cpan -t rpm Hash::Merge::Simple
+fpm -s cpan -t rpm HTTP::Body
+fpm -s cpan -t rpm HTTP::Date
+fpm -s cpan -t rpm HTTP::Headers
+#fpm -s cpan -t rpm HTTP::Server::PSGI
+fpm -s cpan -t rpm HTTP::Tiny
+fpm -s cpan -t rpm Import::Into
+#fpm -s cpan -t rpm IO::File
+fpm -s cpan -t rpm JSON
+#fpm -s cpan -t rpm List::Util
+#fpm -s cpan -t rpm MIME::Base64
+fpm -s cpan -t rpm Module::Runtime
+fpm -s cpan -t rpm Moo
+#fpm -s cpan -t rpm Moo::Role
+
+curl https://cpan.metacpan.org/authors/id/M/MA/MATEU/MooX-Types-MooseLike-0.28.tar.gz -o MooX-Types-MooseLike-0.28.tar.gz
+tar -xvzf MooX-Types-MooseLike-0.28.tar.gz
+cd MooX-Types-MooseLike-0.28
+perl Makefile.PL
+mkdir /tmp/installdir/
+make
+make install DESTDIR=/tmp/installdir
+fpm -s dir -t rpm -n perl-MooX-Types-MooseLike -v 0.28 -C /tmp/installdir
+rm -rf /tmp/installdir
+
+#fpm -s cpan -t rpm overload
+#fpm -s cpan -t rpm parent
+fpm -s cpan -t rpm Plack
+#fpm -s cpan -t rpm Plack::Builder
+#fpm -s cpan -t rpm Plack::Mid…nditional
+#fpm -s cpan -t rpm Plack::Mi…entLength
+fpm -s cpan -t rpm Plack::Middleware::FixMissingBodyInRedirect
+#fpm -s cpan -t rpm Plack::M…ware::Head
+#fpm -s cpan -t rpm Plack::Middleware::RemoveRedundantBody
+#fpm -s cpan -t rpm Plack::Mi…are::Static
+#fpm -s cpan -t rpm Plack::MIME
+#fpm -s cpan -t rpm Plack::Request
+#fpm -s cpan -t rpm Pod::Simple::Search
+#fpm -s cpan -t rpm Pod::Sim…impleTree
+#fpm -s cpan -t rpm POSIX
+fpm -s cpan -t rpm Return::MultiLevel
+fpm -s cpan -t rpm Role::Tiny
+fpm -s cpan -t rpm Safe::Isa
+#fpm -s cpan -t rpm Scalar::Util
+#fpm -s cpan -t rpm strict
+#fpm -s cpan -t rpm Sub::Quote
+
+curl https://cpan.metacpan.org/authors/id/A/AB/ABW/Template-Toolkit-2.26.tar.gz -o Template-Toolkit-2.26.tar.gz
+tar -xvzf Template-Toolkit-2.26.tar.gz
+cd Template-Toolkit-2.26
+perl Makefile.PL
+mkdir /tmp/installdir/
+make
+make install DESTDIR=/tmp/installdir
+fpm -s dir -t rpm -n perl-TemplateToolkit -v 2.26 -C /tmp/installdir
+
+fpm -s cpan -t rpm Template::Tiny
+#fpm -s cpan -t rpm Test::Builder
+#fpm -s cpan -t rpm Test::More
+fpm -s cpan -t rpm Try::Tiny
+fpm -s cpan -t rpm URI
+#fpm -s cpan -t rpm URI::Escape
+#fpm -s cpan -t rpm warnings
+fpm -s cpan -t rpm YAML
+fpm -s cpan -t rpm Dancer2
