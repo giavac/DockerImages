@@ -16,6 +16,7 @@ RUN puppet module install palli-createrepo
 ADD yumrepo.pp /yumrepo.pp
 
 RUN puppet apply /yumrepo.pp
+RUN gem install fpm
 
 EXPOSE 80
 
