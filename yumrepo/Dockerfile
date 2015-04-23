@@ -8,7 +8,7 @@ RUN yum -y install ruby-devel; yum clean all
 RUN yum -y install puppet; yum clean all
 RUN puppet resource package puppet ensure=latest
 
-# Run Puppet only when working as agent
+# Start the Puppet daemon only when working as agent
 #RUN /etc/init.d/puppet start
 
 RUN puppet module install puppetlabs-apache
