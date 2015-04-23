@@ -7,7 +7,10 @@ RUN yum -y install tar; yum clean all
 RUN yum -y install ruby-devel; yum clean all
 RUN yum -y install puppet; yum clean all
 RUN puppet resource package puppet ensure=latest
-RUN /etc/init.d/puppet start
+
+# Run Puppet only when working as agent
+#RUN /etc/init.d/puppet start
+
 RUN puppet module install puppetlabs-apache
 RUN puppet module install stahnma-epel
 RUN puppet module install meltwater-cpan
